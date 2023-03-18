@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <!--123-->
+    <h2>基本使用</h2>
+
+    <button> 发送GET请求</button>
+    <button> 发送POST请求</button>
+    <button> 发送PUT请求</button>
+    <button> 发送DELETE请求</button>
+</div>
+<script>
+    const btns = document.querySelectorAll("button");
+
+    axios.defaults.method = 'GET';// 默认的请求类型为GET
+    axios.defaults.baseURL = 'http://localhost:3000'; // 默认的请求地址
+    axios.defaults.params = {id:100}; // 同一请求ID
+    axios.defaults.timeout = 3000; // 超时时间
+
+    btns[0].onclick = function () {
+        axios({
+            method: 'GET',
+            url: '/posts'
+        }).then(request => {
+            console.log(request)
+        })
+    }
+
+    // 使用POST添加信息
+    btns[1].onclick = function () {
+        axios.post('http://localhost:3000/posts', {
+            title: "标题",
+            author: "作者"
+        })
+    }
+</script>
+</body>
+</html>

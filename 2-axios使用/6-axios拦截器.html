@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+
+</body>
+<script>
+    // 设置一个请求拦截器
+    axios.interceptors.request.use(function (config) {
+        console.log('请求拦截器 成功')
+        // return config;
+        return '参数出了问题'
+    }, function (error) {
+        console.log('请求拦截器 失败')
+        return Promise.reject(error);
+    });
+
+    // 设置响应拦截器
+    axios.interceptors.response.use(function (response) {
+        console.log('响应拦截器 成功')
+        return response;
+    }, function (error) {
+        console.log('响应拦截器 失败')
+        return Promise.reject(error);
+    });
+
+    // 发送请求
+    axios({
+        method: 'get',
+        url: 'http://localhost:3000/posts'
+    }).then(response => {
+        console.log('自定义回调处理成功的结果')
+    }).catch(resaon => {
+        console.log('自定义回调处理失败')
+    })
+</script>
+</html>
+
